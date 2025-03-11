@@ -4,9 +4,17 @@ import { fetchIssues } from "../../lib/github";
 import Navbar from "../../components/Navbar";
 import { motion } from "framer-motion";
 
+interface Issue {
+  id: number;
+  title: string;
+  html_url: string;
+  repository_url: string;
+  user: { login: string };
+}
+
 export default function Home() {
   const [language, setLanguage] = useState("JavaScript");
-  const [issues, setIssues] = useState<any[]>([]);
+  const [issues, setIssues] = useState<Issue[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
