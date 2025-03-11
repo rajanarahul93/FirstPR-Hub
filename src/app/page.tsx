@@ -85,7 +85,10 @@ export default function Home() {
                 </span>
               </p>
               <p className="text-gray-600 text-sm">
-                User: <span className="font-medium">{issue.user.login}</span>
+                User:{" "}
+                <span className="font-medium">
+                  {issue.user?.login ?? "Unknown"}
+                </span>
               </p>
             </motion.li>
           ))}
