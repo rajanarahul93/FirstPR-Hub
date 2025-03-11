@@ -1,5 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useRouter } from "next/navigation";
 import { fetchIssues } from "../../lib/github";
 import Navbar from "../../components/Navbar";
 import { motion } from "framer-motion";
@@ -12,12 +14,19 @@ interface Issue {
   user: { login: string } | null; // Allow null values
 }
 
-
 export default function Home() {
   const [language, setLanguage] = useState("JavaScript");
   const [issues, setIssues] = useState<Issue[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/login"); // Redirect to login page if not authenticated
+    }
+  }, [user, router]);
 
   const handleFetchIssues = async (reset: boolean = false) => {
     setLoading(true);
@@ -28,6 +37,12 @@ export default function Home() {
     setPage(newPage + 1);
     setLoading(false);
   };
+
+  if (!user) {
+    return (
+      <p className="text-center text-white mt-10">Redirecting to login...</p>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#5e5d5c]">
