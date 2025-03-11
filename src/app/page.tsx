@@ -9,8 +9,9 @@ interface Issue {
   title: string;
   html_url: string;
   repository_url: string;
-  user: { login: string };
+  user: { login: string } | null; // Allow null values
 }
+
 
 export default function Home() {
   const [language, setLanguage] = useState("JavaScript");
