@@ -21,7 +21,7 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
       <button
         onClick={handleLogin}
-        className="bg-blue-500 px-6 py-3 rounded shadow-md"
+        className="bg-blue-500 px-6 py-3 rounded shadow-md cursor-pointer"
       >
         Sign in with Google
       </button>
